@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+
+{% block title %}विद्यासाथी - Hindi AI Assistant{% endblock %}
+
+{% block content %}
+<div class="row h-100">
+    <div class="col-12">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-comments me-2"></i>विद्यासाथी से बात करें
+                </h5>
+                <small>हिंदी में शिक्षा और ज्ञान के लिए आपका AI साथी</small>
+            </div>
+            
+            <div class="card-body d-flex flex-column" style="height: 70vh;">
+                <!-- Chat Messages Area -->
+                <div id="chatMessages" class="flex-grow-1 overflow-auto mb-3 p-3 bg-light rounded">
+                    <div class="text-center text-muted">
+                        <i class="fas fa-robot fa-2x mb-2"></i>
+                        <p>नमस्ते! मैं विद्यासाथी हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?</p>
+                        <small>आप हिंदी या रोमन हिंदी में लिख सकते हैं</small>
+                    </div>
+                </div>
+                
+                <!-- Typing Indicator -->
+                <div id="typingIndicator" class="d-none mb-2">
+                    <div class="d-flex align-items-center text-muted">
+                        <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                        <small>विद्यासाथी टाइप कर रहा है...</small>
+                    </div>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="input-group">
+                    <input type="text" id="messageInput" class="form-control" 
+                           placeholder="अपना प्रश्न यहाँ लिखें... (हिंदी या Roman Hindi में)"
+                           autocomplete="off">
+                    <button class="btn btn-primary" type="button" id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary" type="button" id="clearButton" title="बातचीत साफ करें">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                
+                <!-- Quick Suggestions -->
+                <div class="mt-2">
+                    <small class="text-muted">सुझाव:</small>
+                    <div class="mt-1">
+                        <button class="btn btn-sm btn-outline-primary me-1 mb-1 suggestion-btn">गणित में मदद चाहिए</button>
+                        <button class="btn btn-sm btn-outline-primary me-1 mb-1 suggestion-btn">हिंदी व्याकरण सिखाओ</button>
+                        <button class="btn btn-sm btn-outline-primary me-1 mb-1 suggestion-btn">भारतीय इतिहास के बारे में बताओ</button>
+                        <button class="btn btn-sm btn-outline-primary me-1 mb-1 suggestion-btn">दीवाली के बारे में जानकारी</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">फीडबैक दें</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm">
+                    <input type="hidden" id="feedbackUserInput">
+                    <input type="hidden" id="feedbackAssistantResponse">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">रेटिंग (1-5 स्टार)</label>
+                        <div class="rating">
+                            <span class="star" data-rating="1">⭐</span>
+                            <span class="star" data-rating="2">⭐</span>
+                            <span class="star" data-rating="3">⭐</span>
+                            <span class="star" data-rating="4">⭐</span>
+                            <span class="star" data-rating="5">⭐</span>
+                        </div>
+                        <input type="hidden" id="ratingValue" value="0">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="feedbackComments" class="form-label">टिप्पणी (वैकल्पिक)</label>
+                        <textarea class="form-control" id="feedbackComments" rows="3" 
+                                  placeholder="आपका अनुभव कैसा रहा? कोई सुझाव?"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">रद्द करें</button>
+                <button type="button" class="btn btn-primary" id="submitFeedback">फीडबैक भेजें</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const clearButton = document.getElementById('clearButton');
+    const chatMessages = document.getElementById('chatMessages');
+    const typingIndicator = document.getElementById('typingIndicator');
+    
+    // Send message on Enter key
+    messageInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+    
+    // Send button click
+    sendButton.addEventListener('click', sendMessage);
+    
+    // Clear button click
+    clearButton.addEventListener('click', clearChat);
+    
+    // Suggestion buttons
+    document.querySelectorAll('.suggestion-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            messageInput.value = this.textContent;
+            sendMessage();
+        });
+    });
+    
+    // Rating stars
+    document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.dataset.rating);
+            document.getElementById('ratingValue').value = rating;
+            
+            // Update star display
+            document.querySelectorAll('.star').forEach((s, index) => {
+                if (index < rating) {
+                    s.style.color = '#ffc107';
+                } else {
+                    s.style.color = '#dee2e6';
+                }
+            });
+        });
+    });
+    
+    // Submit feedback
+    document.getElementById('submitFeedback').addEventListener('click', submitFeedback);
+});
+
+async function sendMessage() {
+    const messageInput = document.getElementById('messageInput');
+    const message = messageInput.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message to chat
+    addMessageToChat(message, 'user');
+    messageInput.value = '';
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    try {
+        const response = await fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: message })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            addMessageToChat(data.response, 'assistant', message);
+        } else {
+            addMessageToChat('माफ करें, कुछ गलत हुआ है। कृपया दोबारा कोशिश करें।', 'assistant');
+        }
+    } catch (error) {
+        addMessageToChat('कनेक्शन में समस्या है। कृपया बाद में प्रयास करें।', 'assistant');
+    } finally {
+        hideTypingIndicator();
+    }
+}
+
+function addMessageToChat(message, sender, userInput = null) {
+    const chatMessages = document.getElementById('chatMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `mb-3 ${sender === 'user' ? 'text-end' : 'text-start'}`;
+    
+    const isUser = sender === 'user';
+    const bgClass = isUser ? 'bg-primary text-white' : 'bg-white border';
+    const icon = isUser ? 'fas fa-user' : 'fas fa-robot';
+    
+    messageDiv.innerHTML = `
+        <div class="d-inline-block p-3 rounded ${bgClass}" style="max-width: 80%;">
+            <div class="d-flex align-items-start">
+                <i class="${icon} me-2 mt-1"></i>
+                <div class="flex-grow-1">
+                    <div>${message}</div>
+                    ${!isUser ? `<div class="mt-2">
+                        <button class="btn btn-sm btn-outline-secondary me-1" onclick="showFeedbackModal('${userInput}', '${message.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-thumbs-up"></i> फीडबैक
+                        </button>
+                    </div>` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function showTypingIndicator() {
+    document.getElementById('typingIndicator').classList.remove('d-none');
+}
+
+function hideTypingIndicator() {
+    document.getElementById('typingIndicator').classList.add('d-none');
+}
+
+async function clearChat() {
+    if (confirm('क्या आप वाकई बातचीत साफ करना चाहते हैं?')) {
+        try {
+            await fetch('/clear', { method: 'POST' });
+            document.getElementById('chatMessages').innerHTML = `
+                <div class="text-center text-muted">
+                    <i class="fas fa-robot fa-2x mb-2"></i>
+                    <p>नमस्ते! मैं विद्यासाथी हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?</p>
+                    <small>आप हिंदी या रोमन हिंदी में लिख सकते हैं</small>
+                </div>
+            `;
+        } catch (error) {
+            alert('बातचीत साफ करने में समस्या हुई।');
+        }
+    }
+}
+
+function showFeedbackModal(userInput, assistantResponse) {
+    document.getElementById('feedbackUserInput').value = userInput;
+    document.getElementById('feedbackAssistantResponse').value = assistantResponse;
+    
+    // Reset form
+    document.getElementById('ratingValue').value = '0';
+    document.getElementById('feedbackComments').value = '';
+    document.querySelectorAll('.star').forEach(s => s.style.color = '#dee2e6');
+    
+    new bootstrap.Modal(document.getElementById('feedbackModal')).show();
+}
+
+async function submitFeedback() {
+    const rating = parseInt(document.getElementById('ratingValue').value);
+    
+    if (rating === 0) {
+        alert('कृपया रेटिंग दें।');
+        return;
+    }
+    
+    const feedbackData = {
+        user_input: document.getElementById('feedbackUserInput').value,
+        assistant_response: document.getElementById('feedbackAssistantResponse').value,
+        rating: rating,
+        comments: document.getElementById('feedbackComments').value
+    };
+    
+    try {
+        const response = await fetch('/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(feedbackData)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            alert('धन्यवाद! आपका फीडबैक सफलतापूर्वक भेज दिया गया।');
+            bootstrap.Modal.getInstance(document.getElementById('feedbackModal')).hide();
+        } else {
+            alert('फीडबैक भेजने में समस्या हुई।');
+        }
+    } catch (error) {
+        alert('कनेक्शन में समस्या है।');
+    }
+}
+</script>
+{% endblock %}
