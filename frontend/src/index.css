@@ -13,7 +13,16 @@
 >>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
   }
   body {
-    @apply bg-gradient-to-br from-slate-50 to-blue-50 font-english antialiased;
+    @apply font-english antialiased;
+  }
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
   }
 }
 

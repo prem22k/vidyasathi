@@ -65,15 +65,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+    <div className="backdrop-blur-sm bg-white/10 dark:bg-gray-900/10 rounded-2xl border border-white/20 dark:border-gray-700/20 overflow-hidden shadow-2xl">
       {/* Chat Header */}
-      <div className="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-4 text-white">
+      <div className="bg-gradient-to-r from-indigo-500/80 to-purple-600/80 dark:from-indigo-600/80 dark:to-purple-700/80 backdrop-blur-sm px-6 py-4 text-white border-b border-white/20">
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-xl font-semibold">
               {language === 'hi' ? 'चैट' : 'Chat'}
             </h2>
-            <p className="text-primary-100 text-sm">
+            <p className="text-white/80 text-sm">
               {language === 'hi' 
                 ? 'आपका AI शिक्षा सहायक' 
                 : 'Your AI Education Assistant'
@@ -82,7 +82,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
           </div>
           <button
             onClick={onClearChat}
-            className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors duration-200"
+            className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm"
           >
             {language === 'hi' ? 'साफ करें' : 'Clear'}
           </button>
@@ -90,14 +90,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       </div>
 
       {/* Messages Area */}
-      <div className="h-96 overflow-y-auto p-6 space-y-4 bg-gray-50">
+      <div className="h-96 overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-white/5 to-white/10 dark:from-gray-900/5 dark:to-gray-900/10">
         {messages.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🎓</div>
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
               {language === 'hi' ? 'नमस्ते! मैं विद्यासाथी हूं' : 'Hello! I\'m Vidyasaathi'}
             </h3>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               {language === 'hi' 
                 ? 'आज मैं आपकी कैसे मदद कर सकता हूं?'
                 : 'How can I help you learn today?'
@@ -110,7 +110,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 <button
                   key={index}
                   onClick={() => onSendMessage(suggestion)}
-                  className="bg-white hover:bg-primary-50 border border-gray-200 hover:border-primary-200 px-4 py-3 rounded-xl text-sm transition-all duration-200 hover:shadow-md"
+                  className="bg-white/20 dark:bg-gray-800/20 hover:bg-white/30 dark:hover:bg-gray-700/30 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 hover:border-indigo-300 dark:hover:border-indigo-500 px-4 py-3 rounded-xl text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 text-gray-800 dark:text-white"
                 >
                   {suggestion}
                 </button>
@@ -128,7 +128,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       </div>
 
       {/* Input Area */}
-      <div className="p-6 bg-white border-t border-gray-100">
+      <div className="p-6 bg-white/10 dark:bg-gray-900/10 backdrop-blur-sm border-t border-white/20 dark:border-gray-700/20">
         <form onSubmit={handleSubmit} className="flex gap-3">
           <input
             ref={inputRef}
@@ -140,13 +140,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               ? 'अपना सवाल यहाँ लिखें...' 
               : 'Type your question here...'
             }
-            className="input-modern flex-1"
+            className="flex-1 px-4 py-3 bg-white/20 dark:bg-gray-800/20 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400 text-gray-800 dark:text-white transition-all duration-300"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
           >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
