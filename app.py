@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import json
 import os
@@ -10,6 +10,20 @@ app.secret_key = os.urandom(24)
 
 # Initialize the assistant
 assistant = VidyasaathiAssistant()
+
+@app.route('/')
+def health():
+    """Health check endpoint for Railway"""
+    return jsonify({
+        'status': 'healthy',
+        'service': 'Vidyasathi AI Assistant',
+        'version': '1.0.0'
+    })
+
+@app.route('/health')
+def health_check():
+    """Additional health check endpoint"""
+    return jsonify({'status': 'ok'})
 
 @app.route('/chat', methods=['POST'])
 def chat():
