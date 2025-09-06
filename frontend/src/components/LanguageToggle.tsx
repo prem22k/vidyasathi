@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface LanguageToggleProps {
-  language: 'en' | 'hi';
-  onToggle: (language: 'en' | 'hi') => void;
-}
+import type { LanguageToggleProps } from '../types';
 
 const LanguageToggle: React.FC<LanguageToggleProps> = ({ language, onToggle }) => {
   return (

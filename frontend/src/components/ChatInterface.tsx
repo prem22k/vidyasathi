@@ -1,15 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import type { Message } from '../App';
+import type { ChatInterfaceProps } from '../types';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';
-
-interface ChatInterfaceProps {
-  messages: Message[];
-  onSendMessage: (message: string) => void;
-  onClearChat: () => void;
-  isLoading: boolean;
-  language: 'en' | 'hi';
-}
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({
   messages,

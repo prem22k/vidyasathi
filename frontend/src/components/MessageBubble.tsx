@@ -1,10 +1,5 @@
 import React from 'react';
-import type { Message } from '../App';
-
-interface MessageBubbleProps {
-  message: Message;
-  language: 'en' | 'hi';
-}
+import type { MessageBubbleProps } from '../types';
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({ message, language }) => {
   const isUser = message.sender === 'user';

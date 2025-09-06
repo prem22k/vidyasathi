@@ -1,8 +1,5 @@
 import React from 'react';
-
-interface HeaderProps {
-  language: 'en' | 'hi';
-}
+import type { HeaderProps } from '../types';
 
 const Header: React.FC<HeaderProps> = ({ language }) => {
   return (

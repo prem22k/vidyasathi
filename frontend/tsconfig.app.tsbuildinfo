@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/index.tsx","./src/main.tsx","./src/react-app-env.d.ts","./src/types.ts","./src/vite-env.d.ts","./src/components/chatinterface.tsx","./src/components/feedbackmodal.tsx","./src/components/header.tsx","./src/components/languagetoggle.tsx","./src/components/messagebubble.tsx","./src/components/typingindicator.tsx"],"version":"5.8.3"}

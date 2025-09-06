@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-
-interface FeedbackModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  language: 'en' | 'hi';
-  currentResponse: string;
-}
+import type { FeedbackModalProps } from '../types';
 
 const FeedbackModal: React.FC<FeedbackModalProps> = ({ 
   isOpen, 
