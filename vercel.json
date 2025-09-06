@@ -25,10 +25,5 @@
   ],
   "env": {
     "GROQ_API_KEY": "@groq_api_key"
-  },
-  "functions": {
-    "app.py": {
-      "runtime": "python3.9"
-    }
   }
 }
