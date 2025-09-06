@@ -93,6 +93,28 @@ def clear_history():
     except Exception as e:
         return jsonify({'error': f'Server error: {str(e)}'}), 500
 
+@app.route('/admin/feedback')
+def get_all_feedback():
+    """Get all feedback (admin endpoint)"""
+    try:
+        feedback_dir = 'user_feedback'
+        all_feedback = []
+        
+        if os.path.exists(feedback_dir):
+            for filename in os.listdir(feedback_dir):
+                if filename.endswith('.json'):
+                    filepath = os.path.join(feedback_dir, filename)
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        daily_feedback = json.load(f)
+                        all_feedback.extend(daily_feedback)
+        
+        return jsonify({
+            'total_feedback': len(all_feedback),
+            'feedback': all_feedback
+        })
+    except Exception as e:
+        return jsonify({'error': f'Server error: {str(e)}'}), 500
+
 if __name__ == '__main__':
     # Ensure required directories exist
     os.makedirs('user_feedback', exist_ok=True)
