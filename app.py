@@ -1,20 +1,15 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import json
 import os
-import uuid
 from assistant import VidyasaathiAssistant
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = os.urandom(24)
 
 # Initialize the assistant
 assistant = VidyasaathiAssistant()
-
-@app.route('/')
-def index():
-    """Main page with chat interface"""
-    if 'user_id' not in session:
-        session['user_id'] = str(uuid.uuid4())
-    return render_template('index.html')
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -84,21 +79,8 @@ def clear_history():
     except Exception as e:
         return jsonify({'error': f'Server error: {str(e)}'}), 500
 
-@app.route('/about')
-def about():
-    """About page with project information"""
-    return render_template('about.html')
-
-@app.route('/feedback-form')
-def feedback_form():
-    """Feedback form page"""
-    return render_template('feedback.html')
-
 if __name__ == '__main__':
     # Ensure required directories exist
     os.makedirs('user_feedback', exist_ok=True)
-    os.makedirs('templates', exist_ok=True)
-    os.makedirs('static/css', exist_ok=True)
-    os.makedirs('static/js', exist_ok=True)
     
     app.run(debug=True, host='0.0.0.0', port=5000)

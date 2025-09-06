@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "./app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ],
+  "env": {
+    "HUGGINGFACE_API_TOKEN": "@huggingface_api_token",
+    "MODEL_NAME": "sarvamai/OpenHathi-7B-Hi-v0.1-Base",
+    "API_URL": "https://api-inference.huggingface.co/models/sarvamai/OpenHathi-7B-Hi-v0.1-Base"
+  }
+}
