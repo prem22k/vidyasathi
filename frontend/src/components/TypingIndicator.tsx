@@ -1,5 +1,12 @@
 import React from 'react';
+<<<<<<< HEAD
 import type { TypingIndicatorProps } from '../types';
+=======
+
+interface TypingIndicatorProps {
+  language: 'en' | 'hi';
+}
+>>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
 
 const TypingIndicator: React.FC<TypingIndicatorProps> = ({ language }) => {
   return (
