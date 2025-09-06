@@ -16,9 +16,13 @@ class VidyasaathiAssistant:
         self.groq_api_key = os.getenv('GROQ_API_KEY')
         self.groq_url = "https://api.groq.com/openai/v1/chat/completions"
         
-        # Load system prompt
-        with open('system_prompt.txt', 'r', encoding='utf-8') as f:
-            self.system_prompt = f.read()
+        # Load system prompt with error handling
+        try:
+            with open('system_prompt.txt', 'r', encoding='utf-8') as f:
+                self.system_prompt = f.read()
+        except FileNotFoundError:
+            print("Warning: system_prompt.txt not found, using default prompt")
+            self.system_prompt = "You are Vidyasaathi, a helpful Hindi AI assistant for education."
         
         self.conversation_history = []
     
