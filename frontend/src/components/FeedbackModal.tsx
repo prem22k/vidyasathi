@@ -19,7 +19,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      await fetch('http://localhost:5000/feedback', {
+      await fetch('https://vidyasathi-production.up.railway.app/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
