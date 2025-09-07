@@ -5,7 +5,8 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
   isOpen, 
   onClose, 
   language, 
-  currentResponse 
+  currentResponse,
+  currentUserInput 
 }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -26,9 +27,9 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
         },
         body: JSON.stringify({
           rating,
-          comment,
-          user_type: userType,
-          response: currentResponse,
+          comments: comment,
+          user_input: currentUserInput || '',
+          assistant_response: currentResponse || '',
         }),
       });
 
