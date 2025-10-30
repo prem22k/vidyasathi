@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lint (ruff)",
+      "type": "shell",
+      "command": "ruff .",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run backend",
+      "type": "shell",
+      "command": "python app.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run frontend",
+      "type": "shell",
+      "command": "(cd frontend && npm run dev)",
+      "problemMatcher": []
+    }
+  ]
+}

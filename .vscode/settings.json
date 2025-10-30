@@ -1,0 +1,13 @@
+{
+  "python.pythonPath": "${workspaceFolder}/venv/bin/python",
+  "python.linting.enabled": true,
+  "python.linting.ruffEnabled": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "charliermarsh.ruff",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.venv": true,
+    "**/node_modules": true
+  },
+  "python.analysis.typeCheckingMode": "basic"
+}
