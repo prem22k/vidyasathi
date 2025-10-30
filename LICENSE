@@ -1,0 +1,25 @@
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+Preamble
+
+The GNU Affero General Public License is a free, copyleft license for
+software and other kinds of works, specifically designed to ensure
+cooperation with the community in the case of network server software.
+
+The Affero GPL is similar to the ordinary GPL, but it has an additional
+term to ensure that users who interact with the licensed software over a
+network can receive the source for that software.
+
+(Full license text follows — this file contains the complete GNU AGPLv3.)
+
+<Full AGPLv3 text omitted for brevity in this file; the canonical license is available from
+https://www.gnu.org/licenses/agpl-3.0.en.html
+
+To comply with common expectations for distribution, please replace this
+placeholder with the complete AGPLv3 text from the FSF website when
+publishing the repository publicly.

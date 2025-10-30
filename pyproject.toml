@@ -1,0 +1,21 @@
+[project]
+name = "vidhyavaani"
+version = "0.1.0"
+description = "AI-powered educational assistant (Vidhyavaani)"
+authors = ["soai2025 <maintainer@example.com>"]
+readme = "README.md"
+license = { text = "AGPL-3.0-or-later" }
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "S"]
+ignore = ["E203", "W503"]
+
+[tool.pytest]
+minversion = "6.0"
+addopts = "-ra -q"
