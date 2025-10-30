@@ -1,7 +1,8 @@
-# Placeholder uv.lock
-# This file is a placeholder to satisfy repository compliance checks.
-# To generate a real uv.lock for reproducible builds, run the project's
-# dependency lock command in your environment (e.g., `uv lock` or the
-# equivalent tool used by your CI) and replace this file with the output.
+version = 1
+revision = 3
+requires-python = ">=3.10"
 
-# Generated: 2025-10-30
+[[package]]
+name = "vidhyavaani"
+version = "0.1.0"
+source = { editable = "." }
