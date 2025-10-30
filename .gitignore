@@ -40,7 +40,7 @@ env.bak/
 venv.bak/
 
 # IDE
-.vscode/
+# .vscode/ - Now tracked for team consistency
 .idea/
 *.swp
 *.swo
