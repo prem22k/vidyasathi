@@ -1,5 +1,4 @@
 import React from 'react';
-import type { HeaderProps } from '../types';
 
 interface HeaderProps {
   language: 'en' | 'hi';
