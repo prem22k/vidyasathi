@@ -1,10 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-<<<<<<< HEAD
 import type { ChatInterfaceProps } from '../types';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';
 
-=======
 import type { Message } from '../App';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';

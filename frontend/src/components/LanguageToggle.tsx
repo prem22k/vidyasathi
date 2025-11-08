@@ -1,7 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import type { LanguageToggleProps } from '../types';
-=======
 
 interface LanguageToggleProps {
   language: 'en' | 'hi';

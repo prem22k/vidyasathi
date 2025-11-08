@@ -1,7 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import type { MessageBubbleProps } from '../types';
-=======
 import type { Message } from '../App';
 
 interface MessageBubbleProps {
