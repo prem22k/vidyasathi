@@ -15,7 +15,6 @@ interface ChatInterfaceProps {
   language: 'en' | 'hi';
 }
 
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
 const ChatInterface: React.FC<ChatInterfaceProps> = ({
   messages,
   onSendMessage,

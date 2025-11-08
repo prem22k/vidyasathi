@@ -7,7 +7,6 @@ interface FeedbackModalProps {
   language: 'en' | 'hi';
   currentResponse: string;
 }
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
 
 const FeedbackModal: React.FC<FeedbackModalProps> = ({ 
   isOpen, 
