@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import type { FeedbackModalProps } from '../types';
-=======
 
 interface FeedbackModalProps {
   isOpen: boolean;

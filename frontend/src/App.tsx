@@ -36,11 +36,7 @@ function App() {
     setIsLoading(true);
 
     try {
-<<<<<<< HEAD
       const response = await fetch('https://vidyasathi-production.up.railway.app/chat', {
-=======
-      const response = await fetch('http://localhost:5000/chat', {
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

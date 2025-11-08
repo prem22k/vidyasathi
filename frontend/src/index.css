@@ -6,11 +6,7 @@
 
 @layer base {
   * {
-<<<<<<< HEAD
     @apply border-gray-200;
-=======
-    @apply border-border;
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
   }
   body {
     @apply font-english antialiased;
