@@ -1,5 +1,4 @@
 import React from 'react';
-import type { TypingIndicatorProps } from '../types';
 
 interface TypingIndicatorProps {
   language: 'en' | 'hi';
