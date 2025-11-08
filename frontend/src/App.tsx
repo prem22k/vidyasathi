@@ -21,6 +21,7 @@ function App() {
   const [language, setLanguage] = useState<'en' | 'hi'>('en');
   const [showFeedback, setShowFeedback] = useState(false);
   const [currentResponse, setCurrentResponse] = useState<string>('');
+  const [currentUserInput, setCurrentUserInput] = useState<string>('');
 
   const sendMessage = async (text: string) => {
     const userMessage: Message = {
@@ -31,6 +32,7 @@ function App() {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    setCurrentUserInput(text);
     setIsLoading(true);
 
     try {
@@ -116,6 +118,7 @@ function App() {
             onClose={() => setShowFeedback(false)}
             language={language}
             currentResponse={currentResponse}
+            currentUserInput={currentUserInput}
           />
         </div>
       </div>

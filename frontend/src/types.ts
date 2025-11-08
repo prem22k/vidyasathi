@@ -36,4 +36,5 @@ export interface FeedbackModalProps {
   onClose: () => void;
   language: 'hi' | 'en';
   currentResponse: string;
+  currentUserInput?: string;
 }
