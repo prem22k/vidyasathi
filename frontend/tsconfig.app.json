@@ -1,48 +1,25 @@
 {
   "compilerOptions": {
-<<<<<<< HEAD
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-=======
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
     "module": "ESNext",
     "skipLibCheck": true,
 
     /* Bundler mode */
-<<<<<<< HEAD
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-=======
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
     "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
-<<<<<<< HEAD
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
-=======
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
   },
   "include": ["src"]
 }
