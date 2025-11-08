@@ -6,7 +6,6 @@ interface MessageBubbleProps {
   message: Message;
   language: 'en' | 'hi';
 }
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({ message, language }) => {
   const isUser = message.sender === 'user';

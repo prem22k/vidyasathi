@@ -4,7 +4,6 @@ import type { HeaderProps } from '../types';
 interface HeaderProps {
   language: 'en' | 'hi';
 }
->>>>>>> 2aa740dfbd8eeb61aeab796c20f58550b72e573c
 
 const Header: React.FC<HeaderProps> = ({ language }) => {
   return (
