@@ -15,7 +15,8 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
   isOpen, 
   onClose, 
   language, 
-  currentResponse 
+  currentResponse,
+  currentUserInput 
 }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -29,16 +30,16 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      await fetch('http://localhost:5000/feedback', {
+      await fetch('https://vidyasathi-production.up.railway.app/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           rating,
-          comment,
-          user_type: userType,
-          response: currentResponse,
+          comments: comment,
+          user_input: currentUserInput || '',
+          assistant_response: currentResponse || '',
         }),
       });
 
